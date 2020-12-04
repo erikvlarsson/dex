@@ -1,0 +1,49 @@
+.vitality {
+  padding-bottom: 100px;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.vitality > div {
+  display: flex;
+}
+
+.moodSquare {
+  border-radius: 5px;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid white;
+  background: linear-gradient(white, #ddd, #eee);
+  padding: 10px;
+  margin: 10px;
+  text-shadow: 0 -1px 0.5px white;
+  color: #111;
+  cursor: pointer;
+  transition: all 0.1s;
+  text-decoration: none;
+  box-shadow: 0 10px 10px -5px black;
+}
+
+.moodSquare > div {
+  font-size: 50px;
+  text-shadow: 0 2px 1px rgba(0, 0, 0, 0.4);
+}
+
+.energetic:hover {
+  transform: translateY(2px);
+  box-shadow: 0 0 2px 2px rgb(0, 180, 0), 0 5px 2px rgba(0, 0, 0, 0.9);
+}
+.lethargic:hover {
+  transform: translateY(2px);
+  box-shadow: 0 0 2px 2px rgb(180, 0, 0), 0 5px 2px rgba(0, 0, 0, 0.9);
+}
+.energetic:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 1px 2px rgb(0, 180, 0);
+}
+.lethargic:active {
+  transform: translateY(4px);
+  box-shadow: 0 0 1px 2px rgb(180, 0, 0);
+}
