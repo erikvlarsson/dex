@@ -9,8 +9,12 @@ import Routing from "./routes/Routing";
 const app = express();
 
 app.use(cors());
-app.use(morgan("tiny"));
-app.use(helmet());
+app.use(morgan("combined"));
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+  })
+);
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
 
