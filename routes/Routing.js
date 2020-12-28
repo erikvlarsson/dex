@@ -1,39 +1,58 @@
 import authController from "../controllers/AuthController.js";
-import blogController from "../controllers/BlogController.js";
+import postController from "../controllers/postController.js";
 import jwt from "jsonwebtoken";
 
 const setRoutes = (app) => {
+  app.post("/signup", authController.signup);
+  app.post("/login", authController.login);
   app.post(
     "/getRefreshToken",
     withToken,
-    authRefresh,
+    verifyRefreshToken,
     authController.getRefreshToken
   );
   app.post(
     "/getAccessToken",
     withToken,
-    authRefresh,
+    verifyRefreshToken,
     authController.getAccessToken
   );
-  app.post("/login", authController.login);
-  app.post("/signup", authController.signup);
   app.get("/clear-all-users", authController.clearUsers);
-  app.get("/secret", withToken, authAccess, authController.secret);
-  // BLOGPOSTS
-  app.post("/posts", withToken, authAccess, blogController.createPost);
-  app.get("/posts", withToken, authAccess, blogController.getPosts);
+  // POSTS
+  app.post("/posts", withToken, verifyAccessToken, postController.createPost);
+  app.get(
+    "/posts/:userId",
+    withToken,
+    verifyAccessToken,
+    verifyUserId,
+    postController.getPosts
+  );
   app.delete(
     "/posts/:postId",
     withToken,
-    authAccess,
-    blogController.deletePost
+    verifyAccessToken,
+    postController.deletePost
   );
-  app.put("/posts/:postId", withToken, authAccess, blogController.updatePost);
+  app.put(
+    "/posts/:postId",
+    withToken,
+    verifyAccessToken,
+    postController.updatePost
+  );
 };
 
 export default { setRoutes };
 
-const authAccess = (req, res, next) => {
+const verifyUserId = (req, res, next) => {
+  const userId = req.params.userId; // this one is sent with request
+  const tokenUserId = req.user._id; // this one is set by middleware
+  if (userId !== tokenUserId) {
+    res.sendStatus(401);
+  }
+  next();
+};
+
+const verifyAccessToken = (req, res, next) => {
   const decoded = jwt.verify(req.token, process.env.ACCESS_TOKEN_KEY);
   if (decoded) {
     req.user = decoded.user;
@@ -43,7 +62,7 @@ const authAccess = (req, res, next) => {
   }
 };
 
-const authRefresh = (req, res, next) => {
+const verifyRefreshToken = (req, res, next) => {
   const decoded = jwt.verify(req.token, process.env.REFRESH_TOKEN_KEY);
   if (decoded) {
     req.user = decoded.user;

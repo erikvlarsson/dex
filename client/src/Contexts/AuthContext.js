@@ -26,7 +26,7 @@ export const AuthContextProvider = ({ children }) => {
         .then((auth) => {
           setAuth(auth).then(() => {
             if (auth) {
-              setTimeout(() => setHasLoaded(true), 1500);
+              setTimeout(() => setHasLoaded(true), 100);
             } else {
               logout().then(() => {
                 setHasLoaded(true);

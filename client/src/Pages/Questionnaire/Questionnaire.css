@@ -1,0 +1,43 @@
+.questionnaire {
+  border: 4px solid black;
+}
+
+.questionnaire header div {
+  padding: 10px 20px;
+  color: white;
+  border: 2px solid grey;
+}
+
+.activeClass {
+  background: red;
+}
+
+.questionnaire > button {
+  padding: 10px 20px;
+  margin: 10px;
+  border: 1px solid grey;
+  background: linear-gradient(20deg, rgb(203, 115, 208), rgb(43, 38, 154));
+}
+
+.questionnaire .grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  border: 1px dotted red;
+  padding: 10px;
+}
+
+.grid > div {
+  padding: 20px;
+  margin: 5px;
+  border: 1px solid grey;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.grid > .active {
+  background: linear-gradient(
+    20deg,
+    rgba(203, 115, 208, 0.3),
+    rgba(43, 38, 154, 0.3)
+  );
+}

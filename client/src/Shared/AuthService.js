@@ -1,6 +1,9 @@
 import axios from "axios";
+const baseURL =
+  process.env.NODE_ENV === "production" ? "" : "http://localhost:5000/";
+
 const Api = axios.create({
-  baseURL: "",
+  baseURL: baseURL,
 });
 
 class AuthService {
@@ -12,6 +15,7 @@ class AuthService {
           sessionStorage.accessToken = response.data.accessToken;
           localStorage.refreshToken = response.data.refreshToken;
           localStorage.email = userData.email;
+          sessionStorage.userId = response.data.userId;
           auth = true;
         }
       })
@@ -30,6 +34,7 @@ class AuthService {
           sessionStorage.accessToken = response.data.accessToken;
           localStorage.refreshToken = response.data.refreshToken;
           localStorage.email = userData.email;
+          sessionStorage.userId = response.data.userId;
         }
       })
       .catch((error) => {
@@ -53,6 +58,7 @@ class AuthService {
         if (response.status === 201) {
           sessionStorage.accessToken = response.data.accessToken;
           localStorage.refreshToken = response.data.refreshToken;
+          sessionStorage.userId = response.data.userId;
           auth = true;
         }
       })
@@ -76,6 +82,7 @@ class AuthService {
       .then((response) => {
         if (response.status === 201) {
           sessionStorage.accessToken = response.data.accessToken;
+          sessionStorage.userId = response.data.userId;
           auth = true;
         }
       })

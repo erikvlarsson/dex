@@ -7,9 +7,11 @@ const getRefreshToken = async (req, res) => {
   if (user) {
     const accessToken = createAccessToken(user);
     const refreshToken = createRefreshToken(user);
-    res
-      .status(201)
-      .json({ refreshToken: refreshToken, accessToken: accessToken });
+    res.status(201).json({
+      refreshToken: refreshToken,
+      accessToken: accessToken,
+      userId: user._id,
+    });
   } else {
     res.status(403).send();
   }
@@ -19,7 +21,7 @@ const getAccessToken = async (req, res) => {
   const user = await UserModel.findOne({ _id: req.user._id });
   if (user) {
     const accessToken = createRefreshToken(user);
-    res.status(201).json({ accessToken: accessToken });
+    res.status(201).json({ accessToken: accessToken, userId: user._id });
   } else {
     res.status(403).send();
   }
@@ -37,6 +39,7 @@ const login = async (req, res) => {
         res.status(200).json({
           accessToken: accessToken,
           refreshToken: refreshToken,
+          userId: user._id,
         });
       } else {
         res.status(401).send("Wrong password.");
@@ -69,6 +72,7 @@ const signup = async (req, res) => {
         res.status(201).json({
           accessToken: accessToken,
           refreshToken: refreshToken,
+          userId: user._id,
         });
       }
     } catch (error) {
@@ -116,12 +120,7 @@ const clearUsers = async (req, res) => {
   }
 };
 
-const secret = async (req, res) => {
-  res.status(200).json({ message: "YOU MADE IT!" });
-};
-
 export default {
-  secret,
   signup,
   login,
   getRefreshToken,
