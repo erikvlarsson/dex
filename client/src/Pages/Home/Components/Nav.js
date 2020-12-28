@@ -10,8 +10,8 @@ export default function SloppyNav() {
     setMenuListOpen(!menuListOpen);
   };
   return (
-    <header>
-      <Link className="navButton" to="/">
+    <header id="weekdays">
+      {/* <Link className="navButton" to="/">
         <FaHome />
       </Link>
       <Link className="navButton" to="/test">
@@ -24,7 +24,7 @@ export default function SloppyNav() {
       >
         <div>Coins</div>
         <div>Streak</div>
-      </div>
+      </div> */}
       {/* <div className="navButton" onClick={toggleMenuList}>
           <FaSortDown />
         </div> */}
@@ -36,7 +36,14 @@ export default function SloppyNav() {
       >
         <FaBars />
       </Link> */}
-      <MenuList visible={menuListOpen} />
+      {/* <MenuList visible={menuListOpen} /> */}
+      <div className="weekdayLetter">M</div>
+      <div className="weekdayLetter">T</div>
+      <div className="weekdayLetter">W</div>
+      <div className="weekdayLetter">T</div>
+      <div className="weekdayLetter">F</div>
+      <div className="weekdayLetter">S</div>
+      <div className="weekdayLetter">S</div>
     </header>
   );
 }

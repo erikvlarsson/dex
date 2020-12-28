@@ -1,15 +1,10 @@
 import React from "react";
 import Habit from "./Habit/Habit";
-import { FaMoon, FaBrain, FaFire, FaUtensils } from "react-icons/fa";
+import { FaBrain, FaRunning, FaUtensils, FaMoon } from "react-icons/fa";
 
-const habits = [
-  "Focus & Occupation",
-  "Physical Activity",
-  "Nutrition",
-  "Sleep",
-];
+const habits = ["Focus", "Exercise", "Nutrition", "Sleep"];
 
-const habicons = [FaBrain, FaFire, FaUtensils, FaMoon];
+const habicons = [FaBrain, FaRunning, FaUtensils, FaMoon];
 
 export default function Habits() {
   return (

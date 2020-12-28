@@ -6,8 +6,9 @@ import Habits from "./Components/Habits";
 export default function LeftCol() {
   return (
     <div>
+      {/* <HabitsHeader /> */}
+      <div style={{ flex: 1 }}></div>
       <Nav />
-      <HabitsHeader />
       <Habits />
     </div>
   );
